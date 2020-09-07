@@ -1,0 +1,15 @@
+[package]
+name = "actix3"
+version = "0.1.0"
+authors = ["youngbloood <youngbloood@xxx.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+actix-web = "3.0.0-beta.3"
+env_logger = "0.7"
+
+handler = { path = "./handler"}
+model = { path = "./model" }
