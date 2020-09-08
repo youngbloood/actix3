@@ -1,15 +1,19 @@
-use actix_web::{App,HttpServer,middleware};
-// use model::mongo;
-use handler::student;
+use actix_web::{App,HttpServer,middleware,web};
+use handler::*;
+use common::log::init_log;
+use log::*;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // mongo::init();
-
-    std::env::set_var("RUST_LOG", "actix_web=info");
-    env_logger::init();
-    HttpServer::new(||App::new().wrap(middleware::Logger::default()).service(student::index))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    init_log();
+    
+    info!("start server!!!");
+    HttpServer::new(
+        ||{
+            // handlers
+            App::new().wrap(middleware::Logger::default())
+            .service(student::index)
+            .service(web::resource("/article").route(web::post().to(article::save_article)))
+        }
+    ).bind("127.0.0.1:8080")?.run().await
 }

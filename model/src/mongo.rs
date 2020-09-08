@@ -1,15 +1,16 @@
-use lazy_static::lazy_static;
-use mongodb::{Client};
+// use lazy_static::lazy_static;
+// use mongodb::{Client};
+// use mongodb::coll::Collection;
 
-lazy_static! {
-    pub static ref MONGO: Client = create_mongo_client();
-}
+// lazy_static! {
+//     pub static ref MONGO: Client = create_mongo_client();
+// }
 
-fn create_mongo_client() -> Client {
+// fn create_mongo_client() -> Client {
+//     Client::connect("localhost", 27017)
+//         .expect("Failed to initialize standalone client.")
+// }
 
-
-   let mut client =  Client::with_uri_str("localhost:27017");
-   match client{
-       Client=>Option::<Client>(client),
-   }
-}
+// fn collection(coll_name: &str) -> Collection {
+//     MONGO.db("myblog").collection(coll_name)
+// }
