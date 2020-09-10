@@ -2,7 +2,6 @@ use log::*;
 use model::article::Article;
 use actix_web::{HttpResponse, web};
 use common::msg::*;
-#[macro_use]
 use common::cli;
 use common::cli::redis::cmd;
 
@@ -15,6 +14,8 @@ pub async fn save_article(args: web::Json<Article>) -> SimpleResp {
     info!("save article, {:?}", article);
 
     let mut conn = cli::get_conn();
-    cmd("SET").arg("key1").arg("我要分裂了").query(conn)?;
+    let result_t= cmd("SET").arg("key1").arg("我要分裂了").query::<()>(&mut conn);
+    let result =  result_t.unwrap();
+    println!("写入redis的结果:{:?}",result);
     Resp::ok(article.title).to_json_result()
 }

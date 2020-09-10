@@ -1,3 +1,4 @@
+pub extern crate log;
 pub fn init_log() {
     use chrono::Local;
     use std::io::Write;

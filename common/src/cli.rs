@@ -1,8 +1,7 @@
 use lazy_static::lazy_static;
-extern crate redis;
+pub extern crate redis;
 use std::time::Duration;
 use redis::{Client,Connection};
-
 
 lazy_static! {
     // lazy_static的公共变量必须是大写
@@ -19,7 +18,9 @@ fn init_redis() ->Client {
         passwd:None,
     };
     
-    redis::Client::open(option).unwrap()
+    let client = redis::Client::open(option);
+    // debug!("connect redis success");
+    client.unwrap()
 }
 
 pub fn get_conn()->Connection{
