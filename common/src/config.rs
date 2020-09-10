@@ -43,5 +43,7 @@ pub struct Redis{
     pub port :Option<i32>,
     pub db :Option<i32>,
     pub user :Option<String>,
-    pub passwd:Option<String>
+    pub passwd:Option<String>,
+    pub read_timeout:Option<i32>,
+    pub write_timeout:Option<i32>,
 }

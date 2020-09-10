@@ -1,8 +1,10 @@
-use lazy_static::lazy_static;
 pub extern crate redis;
-use std::time::Duration;
-use redis::{Client,Connection};
+use lazy_static::lazy_static;
+pub mod myredis;
+pub mod mymongo;
+use redis::Client;
 use super::config::CONF;
+
 
 lazy_static! {
     // lazy_static的公共变量必须是大写
@@ -30,13 +32,7 @@ fn init_redis() ->Client {
     client.unwrap()
 }
 
-pub fn get_conn()->Connection{
-    let conn = REDIS.get_connection().unwrap();
-    let _ = conn.set_read_timeout(Some(Duration::from_secs(5)));
-    let _ = conn.set_write_timeout(Some(Duration::from_secs(5)));
 
-    conn
-}
 
 
 
