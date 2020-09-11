@@ -1,8 +1,8 @@
-use super::REDIS;
 use std::time::Duration;
 use redis::{Client,Connection};
 use crate::config::CONF;
 use crate::cli;
+use crate::cli::REDIS;
 
 
 // 初始化redis
@@ -16,8 +16,8 @@ pub fn init_redis() ->Client {
     let option = redis::ConnectionInfo{
         addr:Box::new(redis::ConnectionAddr::Tcp(CONF.redis.addr.as_ref().unwrap().to_string(),CONF.redis.port.unwrap() as u16)),
         db:db,
-        username:cli::handle_str_2_none(CONF.redis.user.clone()),
-        passwd:cli::handle_str_2_none(CONF.redis.passwd.clone()),
+        username:cli::handle_str_2_none(CONF.redis.user.clone(),None),
+        passwd:cli::handle_str_2_none(CONF.redis.passwd.clone(),None),
     };
 
     

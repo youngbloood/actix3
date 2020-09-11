@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::string::String;
 use lazy_static::lazy_static;
+use std::time::Duration;
 
 lazy_static! {
     #[derive(Debug)]
@@ -31,6 +32,7 @@ fn init_config(file_path:&str)->All{
 #[derive(Debug,Clone)]
 pub struct All{
     pub redis :Redis,
+    pub mongo :Mongo,
     pub http_port:Option<i32>
 }
 
@@ -46,4 +48,13 @@ pub struct Redis{
     pub passwd:Option<String>,
     pub read_timeout:Option<i32>,
     pub write_timeout:Option<i32>,
+}
+
+
+#[derive(Debug,Clone)]
+#[derive(Deserialize)]
+pub struct Mongo{
+    pub add:Option<String>,
+    pub port :Option<u16>,
+    pub connect_timeout: Option<Duration>
 }
