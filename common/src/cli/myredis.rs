@@ -16,10 +16,11 @@ pub fn init_redis() ->Client {
     let option = redis::ConnectionInfo{
         addr:Box::new(redis::ConnectionAddr::Tcp(CONF.redis.addr.as_ref().unwrap().to_string(),CONF.redis.port.unwrap() as u16)),
         db:db,
-        username:cli::handle_str_2_none(CONF.redis.user.clone(),None),
-        passwd:cli::handle_str_2_none(CONF.redis.passwd.clone(),None),
+        username:cli::rm_none(CONF.redis.user.clone(),None),
+        passwd:cli::rm_none(CONF.redis.passwd.clone(),None),
     };
 
+    println!("redis的用户 = {:?}",cli::rm_none(CONF.redis.user.clone(),None).unwrap());
     
     let client = redis::Client::open(option);
     // debug!("connect redis success");

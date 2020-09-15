@@ -1,5 +1,3 @@
-// #[cfg(feature = "sync")]
-// use mongodb::Client;
 pub extern crate redis;
 use lazy_static::lazy_static;
 pub mod myredis;
@@ -21,38 +19,18 @@ lazy_static!{
 }
 
 
-
-fn handle_str_2_none(args :Option<String>,default :Option<String>)->Option<String>{
+// 去掉空值
+pub fn rm_none<T:Default+Eq>(args :Option<T>,default_arg :Option<T>)->Option<T> {
     match args{
         Some(val) => {
-            if val==""{
-                match default{
-                    None =>None,
-                    Some(val) => Some(val),
-                }
+            if T::default().eq(&val){
+                default_arg
             }else{
                 Some(val)
-            }},
-        None =>{
+            }
+        },
+        None => {
             None
         },
     }
 }
-
-// // 去掉空值
-// pub fn rm_none<T :i8+i16+i32+i64+i128+u8+u16+u32+u64+u128+String>(args :Option<T>,default :Option<T>)->Option<T>{
-//     match args{
-//         Some(val) => {
-//             if val==""{
-//                 match default{
-//                     None =>None,
-//                     Some(val) => Some(val),
-//                 }
-//             }else{
-//                 Some(val)
-//             }},
-//         None =>{
-//             None
-//         },
-//     }
-// }

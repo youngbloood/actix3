@@ -6,3 +6,6 @@ port = 6379
 db = 2
 user = ""
 passwd = ""
+
+
+[mongo]
